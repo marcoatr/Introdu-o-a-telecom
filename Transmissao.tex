@@ -1,0 +1,503 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage[margin = 1in]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{listings}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{indentfirst}
+\usepackage{textcomp}
+
+
+
+
+\begin{document}
+  
+\begin{titlepage}
+ \vfill
+  \begin{center}
+   {\large \textbf{UNIVERSIDADE FEDERAL DO PARANÁ}} \\[5cm]
+
+   {\large {Marco Antonio Rios  GRR20133243 \\ Thierry Dompsin Maurice GRR20133243 }}\\[5cm]
+
+
+   {\Large \textbf{TRANSMISSÃO DE UM JOGO NA ARENA DA BAIXADA}}\\[4cm]
+  \vfill
+
+\vspace{2cm}
+
+\large \textbf{Curitiba}
+
+\large \textbf{Junho de 2015}
+\end{center}
+\end{titlepage}
+  
+  
+  
+  
+  \thispagestyle{empty}
+  \clearpage
+  \setcounter{page}{1}
+  \tableofcontents
+  
+  \clearpage
+  
+  \section{INTRODUÇÃO}
+  
+  Para que um jogo de futebol seja transmitido para as casas dos torcedores,
+ocorre uma grande mobilização das emissoras de TV para que ocorra a melhor
+transmissão possível. Cerca de 10 a 20 câmeras são usadas (variando de jogo a
+jogo), sendo estas fixas, ou móveis; mais de cem pessoas são mobilizadas, entre
+elas, reportes, cinegrafistas, narradores, entre outros.
+
+As câmeras e os equipamentos eletrônicos são conectados a um caminhão
+da emissora estacionado fora do estádio por fios de até 300 metros. Nesta unidade
+móvel, trabalham 20 pessoas que selecionam e preparam os replays que são
+captados pelas câmeras e microfones dentro do campo.
+
+Apenas uma imagem por vez é enviada à emissora pela antena do caminhão.
+No prédio desta, uma antena capta o sinal do satélite; as micro-ondas são
+decodificadas em sinal de TV e enviado para uma sala onde a imagem será pós-produzida.
+
+Ainda na emissora, há a sala do switcher onde ocorre a “mixagem” das
+imagens que irão para a casa dos espectadores. No intervalo do jogo, por exemplo,
+alterna-se a imagem do estádio com outras produzidas nos estúdios ou videotapes.
+Na sala do switcher são inseridos, ainda, os GCs (as paralavras que aparecem na
+tela informando o placar, as substituições, escalações etc.). Tudo que será realizado
+antes, durante e depois do jogo é pré-programado, sendo uma pessoa responsável
+pela atualizações das estatísticas e outra nas publicações na internet em tempo
+real. Um coordenador opera as atividades dentro do switcher usando ponto
+eletrônico para facilitar a comunicação com a equipe de cerca de 20 pessoas.
+
+Do switcher, a imagem é codificada em sinal de VHF é transmitida pela
+mesma antena que recebe os sinais via satélite. Mesmo com toda essa operação
+para se transmitir um jogo, um gol feito no estádio chega às casas dos fans com
+atraso de 1 segundo.
+ 
+  \subsection{APRESENTAÇÃO DO PROBLEMA}
+A emissão de um jogo de Futebol entre Atlético-PR e Vasco da Gama do Rio
+de Janeiro, na Baixada, deve ser gerado por um equipamento rádio móvel e, então,
+primeiramente deve ser enviado para uma torre de TV que deverá distribuir este
+sinal na região metropolitana de Curitiba a uma distância máxima de 50km nas
+frequências de 3.5 GHz, 8.45GHz e 12GHz. Este mesmo sinal, a partir da torre de
+TV, em sua frequência máxima (12GHz), deve ser enviado para um satélite
+geoestacionário que dista 43.00km e então em canal aberto ser entregue para uma
+torre de televisão na Gávea que deverá distribuí-lo para todo o estado do Rio de
+Janeiro.
+
+Fornece-se para a solução deste projeto:
+\begin{itemize}
+ \item  potência de transmissão do rádio móvel = $32W$;
+ \item  potência de transmissão do satélite para Terra =$ 0.35kW$;
+ \item  tensão induzida de Geração = $12.4 dB \mu V$;
+ \item  nível mínimo de sinal aceitável = $-36dBm$;
+ \item  nível mínimo do sinal na Gávea = $-79dBm$;
+ \item  característica das antenas: as antenas utilizadas são antenas direcionais, cujo ganho não é unitário ($0dB$);
+ \item  diâmetro da antena para o rádio móvel $D=1.47m$;
+ \item  diâmetro da antena para a torre $d=1.3m$;
+ \item  eficiência da antena = 72%;
+ \item  área efetiva da antena $Ae=0.4m2$;
+\end{itemize}
+Toda a propagação se dá em espaço livre.
+ \subsection{OBJETIVO}
+Apresentar detalhadamente uma solução para a transmissão de um jogo
+entre Atlético e Vasco.
+ \subsubsection{OBJETIVO GERAL}
+Dado o princípio da transmissão de um sinal e os seus devidos problemas na
+distribuição, captação e envio desta, objetivou-se desenvolver uma possível solução
+para o Projeto.
+
+ \subsubsection{OBJETIVOS ESPECÍFICOS}
+Dentre os principais objetivos destacam-se:
+\begin{itemize}
+  \item cálculo do ganho das antenas;
+  \item cálculo as perdas por propagação;
+  \item cálculo a perda da transmissão entre as antenas;
+  \item cálculo da potência recebida (Pr) na torre de TV;
+  \item cálculo da margem de sinal recebido (M);
+  \item análise do sinal Terra-satélite;
+  \item cálculo da atenuação em espaço livre;
+  \item cálculo da potência recebida no satélite;
+  \item cálculo da densidade de fluxo do sinal em espaço-livre;
+  \item cálculo do e.i.r.p.;
+  \item cálculo da densidade de fluxo Poyinting na recepção;
+  \item cálculo da margem do sinal recebido (M) na Gávea;
+\end{itemize}
+ 
+ \section{ANÁLISE DO SINAL EM TERRA}
+ \subsection{CÁLCULO DO GANHO DAS ANTENAS}
+  Sabe-se que a potência recebida pela antena isotrópica:
+  \begin{equation}
+  \dfrac{P_t}{4 \pi d^2} \times \dfrac{\lambda ^ 2}{4 \pi}
+  \end{equation}
+
+e a potência recebida pela antena parabólica
+
+\begin{equation}
+  \dfrac{P_t}{4 \pi d^2} \times Ae
+\end{equation}
+
+ onde
+ 
+ \begin{equation}
+  Ae = \dfrac{\pi D^2}{4} \times \eta
+ \end{equation}
+ 
+ representa a abertura efetiva da antena. Logo, tem-se que o ganho G representa a
+relação entre a potência recebida pela antena parabólica com a potência recebida
+pela antena isotrópica. Assim,
+
+\begin{equation}
+ G = \dfrac{\dfrac{P_t}{4 \pi d^2} \times Ae}{ \dfrac{P_t}{4 \pi d^2} \times \dfrac{\lambda ^ 2}{4 \pi}} = \dfrac{4 \pi Ae}{\lambda^2} 
+\end{equation}
+
+consequentemente o ganho em dBi será
+
+\begin{equation}
+ G[dBi] = 10 \times log(\dfrac{4 \pi Ae}{\lambda^2})
+\end{equation}
+
+Então, para o rádio móvel, sendo D=1.47m e $\eta = 0.72$, tem-se
+
+\begin{equation}
+ Ae = \dfrac{\pi D^2}{4} \times = \dfrac{\pi \times 1.47^2}{4} \times 0.72 = 1.221960162 m^2
+\end{equation}
+
+Utilizando-se o a equação 05, substitui-se o valor de Ae da equação 06 e os três
+valores de frequência (3.5GHz, 8.45GHz e 12GHz), obtém-se os valores da tabela
+1.
+\begin{table}[!h]
+  \begin{center}
+    \caption{Valores calculados dos ganhos para diferentes frequências} 
+    \begin{tabular}{p{3in} p{3in}}\hline \hline
+      \multicolumn{1}{c}{frequência(GHz)} & \multicolumn{1}{c}{Ganho G(dBi)}\\ \hline
+      \multicolumn{1}{c}{3.5} & \multicolumn{1}{c}{33.19} \\ 
+      \multicolumn{1}{c}{8.45} & \multicolumn{1}{c}{40.85} \\ 
+      \multicolumn{1}{c}{12} & \multicolumn{1}{c}{43.90}\\ \hline
+      &
+    \end{tabular}
+  \end{center}
+\end{table}
+
+
+Agora, para a Torre, sendo d=1.3m e $\eta = 0.72$, tem-se
+
+\begin{equation}
+ Ae = \dfrac{\pi D^2}{4} \times \eta = \dfrac{\pi \times 1.3^2}{4} \times 0.72 = 0.95 m^2
+\end{equation}
+
+Utilizando-se o a equação (5), substitui-se o valor de Ae da equação (7) e os três
+valores de frequência (3.5GHz, 8.45GHz e 12GHz), obtém-se os valores da tabela
+2.
+
+\begin{table}[!h]
+  \begin{center}
+    \caption{Valores calculados dos ganhos para diferentes frequências} 
+    \begin{tabular}{p{3in} p{3in}}\hline \hline
+      \multicolumn{1}{c}{frequência(GHz)} & \multicolumn{1}{c}{Ganho G(dBi)}\\ \hline
+      \multicolumn{1}{c}{3.5} & \multicolumn{1}{c}{32.10} \\ 
+      \multicolumn{1}{c}{8.45} & \multicolumn{1}{c}{40.16} \\ 
+      \multicolumn{1}{c}{12} & \multicolumn{1}{c}{42.81}\\ \hline
+      &
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Desta maneira, o ganho total será
+
+\begin{equation}
+ G_{TOTAL} = G_{RADIOMOVEL} + G_{TORRE}
+\end{equation}
+
+Logo, para cada valor de frequência obtém-se, a partir da equação 08, diferentes
+ganhos como mostra a tabela 3.
+
+\begin{table}[!h]
+  \begin{center}
+    \caption{Valores calculados dos ganhos para diferentes frequências} 
+    \begin{tabular}{p{1in} p{3.5in} p{3in}}\hline \hline
+      \multicolumn{1}{c}{frequência(GHz)} & \multicolumn{1}{c}{Soma dos Ganhos (Rádio Móvel e Torre) (dBi)} & \multicolumn{1}{c}{Ganho Total(dBi)}\\ \hline
+      \multicolumn{1}{c}{3.5} & \multicolumn{1}{c}{33.19+32.10} & \multicolumn{1}{c}{65.29} \\ 
+      \multicolumn{1}{c}{8.45} & \multicolumn{1}{c}{40.85+40.16} & \multicolumn{1}{c}{81.36} \\ 
+      \multicolumn{1}{c}{12} & \multicolumn{1}{c}{43.90+42.81} & \multicolumn{1}{c}{86.71}\\ \hline
+      &
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\subsection{CÁLCULO DAS PERDAS DE PROPAGAÇÃO}
+Para se obter as perdas por propagação, dado que d=50km, utiliza-se a
+seguinte fórmula
+
+\begin{equation}
+ T_o = 92.44 + 20 \times log(f)(Ghz) + 20 \times log(d)(km)
+ \end{equation}
+
+ Substituiu-se os valores de frequência (3.5GHz, 8.45 GHz e 12GHz) na equação 09,
+têm-se os valores das perdas de propagação na tabela 4.
+
+\begin{table}[!h]
+  \begin{center}
+    \caption{Valores calculados das perdas por propagação} 
+    \begin{tabular}{p{3in} p{3in}}\hline \hline 
+      \multicolumn{1}{c}{frequência(GHz)} & \multicolumn{1}{c}{Perdas $T_0$(dBi}\\ \hline
+      \multicolumn{1}{c}{3.5} & \multicolumn{1}{c}{137.3} \\ 
+      \multicolumn{1}{c}{8.45} & \multicolumn{1}{c}{144.3} \\ 
+      \multicolumn{1}{c}{12} & \multicolumn{1}{c}{148}\\ \hline
+      &
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\subsection{CÁLCULO DAS PERDAS DE TRANSMISSÃO ENTRE ANTENAS}
+
+Sendo as perdas de transmissão entre as antenas igual a diferença entre o
+as perdas por Propagação e o ganho da Torre, tem-se
+
+\begin{equation}
+\Xi_o = T_o - G_{TORRE} 
+\end{equation}
+Com os valores obtidos para as perdas de transmissão da tabela 4 e os ganhos da
+Torre da tabela 2, substituiu-se estes na equação 10. Assim, obtemos os valores
+das perdas de transmissão entre as antenas na tabela 5.
+
+\begin{table}[!h]
+  \begin{center}
+    \caption{Valores calculados das perdas de transmissão entre antenas} 
+    \begin{tabular}{p{1in} p{1in} p{1in} p{1in}}\hline \hline
+      \multicolumn{1}{c}{frequência} & \multicolumn{1}{c}{Ganho da Torre} & \multicolumn{1}{c}{Perdas por Propagação} & \multicolumn{1}{c}{Perdas por transmissão} \\ 
+      \multicolumn{1}{c}{(Ghz)} & \multicolumn{1}{c}{(dB)} & \multicolumn{1}{c}{(dB)} & \multicolumn{1}{c}{(dB)} \\ \hline
+      \multicolumn{1}{c}{3.5} & \multicolumn{1}{c}{65.29} & \multicolumn{1}{c}{137.3} & \multicolumn{1}{c}{72.01} \\ 
+      \multicolumn{1}{c}{8.45} & \multicolumn{1}{c}{81.36} & \multicolumn{1}{c}{144.3} & \multicolumn{1}{c}{62.94} \\ 
+      \multicolumn{1}{c}{12} & \multicolumn{1}{c}{86.71} & \multicolumn{1}{c}{148} & \multicolumn{1}{c}{61.29} \\ \hline
+      &
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\subsection{CÁLCULO DA POTÊNCIA RECEBIDA NA TORRE DE TV}
+O valor da potência recebida pela torre de TV é dada pela equação
+
+\begin{equation}
+ P_R = P_o + \Xi _o
+\end{equation}
+
+Dado que a potência do transmissor do rádio móvel é de 32W, têm-se que esse
+valor em dBm 
+
+\begin{equation}
+P[dBm]= 10 \times log\dfrac{P_T}{1mW} = 10 \times log\frac{32}{1mW} = 45dBm 
+\end{equation}
+
+Desta maneira, pode-se calcular o valor da potência recebida pela torre de Tv. Os
+valores obtidos encontram-se na tabela 6.
+
+\begin{table}[!h]
+  \begin{center}
+    \caption{Valores calculados das potências recebidas na torre de TV} 
+    \begin{tabular}{p{3in} p{3in}}\hline \hline
+      \multicolumn{1}{c}{frequência(GHz)} & \multicolumn{1}{c}{Perdas $P_R$ (dBm)}\\ \hline
+      \multicolumn{1}{c}{3.5} & \multicolumn{1}{c}{-27.01} \\ 
+      \multicolumn{1}{c}{8.45} & \multicolumn{1}{c}{-17.94} \\ 
+      \multicolumn{1}{c}{12} & \multicolumn{1}{c}{-16.29}\\ \hline
+      &
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Percebe-se que os valores obtidos estão abaixo do nível mínimo de sinal a ser
+recebido na torre de TV (-36dBm). Desta maneira, deve-se calcular a margem de
+sinal recebido (M).
+
+\subsection{CÁLCULO DA MARGEM DE SINAL RECEBIDO}
+
+Sendo -36dBm o nível mínimo de sinal a ser recebido na torre de TV, podese
+calcular a margem de sinal recebido através da equação
+
+\begin{equation}
+ M = P_R -(-36dBm)
+\end{equation}
+  Assim, para diferentes valores de frequência, têm-se os valores obtidos para a
+margem de sinal na tabela 7.
+
+\begin{table}[!h]
+  \begin{center}
+    \caption{Valores calculados da margem de sinal recebido} 
+    \begin{tabular}{p{3in} p{3in}}\hline \hline
+      \multicolumn{1}{c}{frequência(GHz)} & \multicolumn{1}{c}{Margem M (dBm)}\\ \hline
+      \multicolumn{1}{c}{3.5} & \multicolumn{1}{c}{8.99} \\ 
+      \multicolumn{1}{c}{8.45} & \multicolumn{1}{c}{18.06} \\ 
+      \multicolumn{1}{c}{12} & \multicolumn{1}{c}{19.71}\\ \hline
+      &
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Fazendo a comparação da Margem M obtida na tabela 7 com os valores mínimos,
+nota-se que esses estão acima como mostra a tabela 8.
+
+\begin{table}[!h]
+  \begin{center}
+    \caption{Comparação das Margens} 
+    \begin{tabular}{p{3in} p{3in}}\hline \hline
+      \multicolumn{1}{c}{Margem M} & \multicolumn{1}{c}{Margem M (dBm)}\\ \hline
+      \multicolumn{1}{c}{8.99} & \multicolumn{1}{c}{$M \leq 20*log f = 10.88$} \\ 
+      \multicolumn{1}{c}{18.06} & \multicolumn{1}{c}{$M \leq 20*log f = 18.53$} \\ 
+      \multicolumn{1}{c}{19.71} & \multicolumn{1}{c}{$M \leq 20*log f = 21.58$}\\ \hline
+      &
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Para efeito prático, a margem do sinal recebido deve ser $M \leq 20*log$ f para que não
+se entregue apenas ruído. Logo todos os sinais entregues são satisfatórios.
+
+O esquemático da figura 1 exemplifica o problema até agora tratado
+
+\section{ANÁLISE TERRA-SATÉLITE}
+\subsection{ANÁLSE DO SINAL TERRA-SATÉLITE}
+A análise pode-se ser vista segundo a figura 2, onde nota-se a torre de TV
+mandando o sinal de 12GHz para o satélite.
+\subsection{CÁLCULO DA ATENUAÇÃO EM ESPAÇO LIVRE}
+Sendo a equação 09, pode-se obter, também, a atenuação em espaço livre. 
+\begin{equation}
+ A_{EL} = 92.44 + 20 \times log(f)(GHz) + 20 \times log(d)(km)
+\end{equation}
+Sendo os parâmetros de f e d iguais a 12GHz e 43000km, respectivamente, tem-se
+o valor da atenuação dado por
+\begin{equation}
+ A_{EL} = 92.44 + 20 \times log(12) + 20 \times log(43000) = 206.69dB
+\end{equation}
+
+\subsection{POTÊNCIA RECEBIDA NO SATÉLITE}
+A potência é dada pela equação
+\begin{equation}
+ P_{RSAT} = P_{T-TORRE} - A_{EL} + G_{RX-SATELITE}
+ \end{equation}
+
+Deseja-se saber a potência recebida pela Torre $(P_T)$ e a Ganho recebido pelo
+satélite $(G_{RX})$, sendo que $A_{EL}$ já foi calculado e tem o valor de 206.69dB
+
+\subsection{CÁLCULO DO GANHO DA ANTENA SATELITAL G$_{RX}$}
+Para se calcular o ganho da antena, primeiramente, deve-se obter o
+comprimento de onda para uma frequência de 12GHz.
+
+\begin{equation}
+ \lambda = \dfrac{c}{f} = \dfrac{3 \times 10^8}{12 \times 10^9} = 0.025
+\end{equation}
+Com o valor do comprimento de onda obtido na equação 16 e o valor dado da área
+do satélite igual a $0.4m^2$, pode-se obter o ganho através da equação 5.
+
+\begin{equation}
+ G_{RX} = 10 \times log \left (\dfrac{4 \pi A_e}{\lambda^2} \right ) = 39.05dBi = 7943W
+\end{equation}
+
+Considera-se que a potência de transmissão da torre de TV para o satélite é de
+55dBm. Logo, tem se a potência recebida pelo satélite dada por
+ 
+ \begin{equation}
+  P_{RSAT} = 55dBm - 206.69dB + 39.05dBi = - 112.64dBm
+ \end{equation}
+Assim, a potência recebida no satélite pode ser calculada utilizando a fórmula de
+Friis (1946).
+
+\begin{equation}
+ P_{RSAT} = \left (\dfrac{\lambda}{4 \pi d} \right) ^2 \times G_{TX} \times G_{RX} \times P_T
+\end{equation}
+
+sendo PT a potência transmitida pela torre de TV.
+Desta maneira, tem-se o esquemático da figura 3.
+
+\section{ANÁLISE SATÉLITE-TERRA}
+\subsection{CÁLCULO DA DENSIDADE DE FLUXO DO SINAL EM ESPAÇO-LIVRE (FLUXO DE VETOR DE POYNTING)}
+O fluxo de vetor de Poynting é calculado pela fórmula
+\begin{equation}
+ P_{POYNTING} = \dfrac{P_t}{4 \pi d} = \dfrac{350}{4 \pi \times 43000^2} = 1.50 \times 10^{-8} W
+ \end{equation}
+ 
+ Logo, o valor em dB do fluxo do vetor de Poynting
+ 
+\begin{equation}
+ P_{POYNTING}[dB] = 20 \times log(P_{POYNTING}) = -156.44 \dfrac{dBw}{m^2} 
+\end{equation}
+
+\subsection{CÁLCULO DO E.I.R.P}
+O cálculo do e.i.r.p. significa potência efetiva irradiada. Deve-se calcular o
+e.i.r.p. toda vez que se liga um transmissor a uma antena, para se saber qual a real
+potência que a antena está transmitindo. O fato de se querer saber qual a potência
+real é devido à se achar parte da potência que se perde nos polos além do restante
+da potência sofre a atenuação do ganho da antena.
+Logo, pode-se calcular o e.i.r.p. através da equação
+
+\begin{equation}
+ e.i.r.p = P_t + G_t - P
+\end{equation}
+onde as incógnitas são:
+\begin{itemize}
+  \item  Pt = Potência transmitida = 0.35kW = 25.45dBW;
+  \item Gt = Ganho de transmissão = 39.05 dB;
+  \item P = Perda nos cabos = 4dB;
+\end{itemize}
+
+Nota-se que a e.i.r.p. deve ser calculada em dBm ou em dBW, Assim, 
+
+\begin{equation}
+e.i.r.p = 25.45dBW + 39.05dB - 4dB = 60dBW
+\end{equation}
+
+O valor da equação em dBm será
+
+\begin{equation}
+ e.i.r.p = 65.44dBm + 39.05dB - 4dB = 100.49dBm
+\end{equation}
+
+\subsection{DENSIDADE DE FLUXO P$_{POYNTING}$ NA RECEPÇÃO}
+O valor da densidade do fluxo de Poynting na recepção é calculado por
+
+\begin{equation}
+  P_{POYNTING-RX} = e.i.r.p +  P_{POYNTING}
+\end{equation}
+
+substituindo os valores obtidos das equações 22 e 25 para fluxo do vetor de
+Poynting e e.i.r.p., respectivamente, tem-se
+
+\begin{equation}
+ P_{POYNTING-RX} = -156.44dBw +  60dBW = -96.44\dfrac{dBw}{m^2}
+ \end{equation}
+ 
+ ou 
+ 
+ \begin{equation}
+  P_{POYNTING-RX} = -69.88 \dfrac{dBmW}{m^2}
+ \end{equation}
+
+ \subsection{CÁLCULO DA MARGEM DO SINAL RECEBIDO (M) NA GÁVEA}
+ Assim, substituindo o valor obtido na equação 28, a margem do sinal que é
+recebido na Gávea é calculado por
+
+\begin{equation}
+ M = P_R - (-79dBm) = -69.88 - (-79) = 9.12
+\end{equation}
+Sendo a margem de sinal calculada por 
+\begin{equation}
+ M \leq 20 \times log (f) = 20 \times log 12 \therefore M \leq 21.58
+\end{equation}
+
+ 
+\section{CONCLUSÃO} 
+O sinal recebido na Gávea é de -69.88 dBmW que é altamente satisfatório,
+pois está abaixo do sinal mínimo de -79dBm que foi imposta no projeto. O que
+representa 9.12 dB acima do mínimo.
+Pode-se verificar pela simulação da figura 4 que, dado os parâmetros de
+e.i.r.p., a distância entre as antenas e entre outros, pode-se trilhar, assim, um
+caminho que o sinal irá percorrer.
+ 
+ 
+ 
+ 
+
+\end{document}
+
